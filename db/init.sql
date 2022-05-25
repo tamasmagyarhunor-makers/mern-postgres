@@ -1,0 +1,1 @@
+CREATE DATABASE mern_postgres;
