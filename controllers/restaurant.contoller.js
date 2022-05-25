@@ -12,9 +12,6 @@ exports.create = (req, res) => {
         return;
     }
 
-    console.log(req.body);
-    console.log('--------------------');
-    console.log(Restaurant);
     // Create a Restaurant
     Restaurant.create(req.body)
         .then(restaurant => {
