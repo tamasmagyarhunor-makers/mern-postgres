@@ -30,5 +30,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     {
         timestamps: true
-    })
-}
+    });
+    return Restaurant;
+};

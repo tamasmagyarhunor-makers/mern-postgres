@@ -12,6 +12,9 @@ exports.create = (req, res) => {
         return;
     }
 
+    console.log(req.body);
+    console.log('--------------------');
+    console.log(Restaurant);
     // Create a Restaurant
     Restaurant.create(req.body)
         .then(restaurant => {
@@ -33,7 +36,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Restaurants from the database.
 exports.findAll = (req, res) => {
-    
+
 };
 
 // Find a single Restaurant with an id
