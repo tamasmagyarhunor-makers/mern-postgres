@@ -7,6 +7,7 @@ exports.create = (req, res) => {
     // Validate request - ideally we don't do this here
     if (!req.body.name) {
         res.status(400).send({
+            success: false,
             message: "Restaurant name can't be empty!"
         });
         return;
