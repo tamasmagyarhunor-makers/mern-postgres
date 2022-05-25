@@ -5,5 +5,11 @@ module.exports = app => {
     // Create a new Restaurant 
     router.post('/', restaurants.create);
 
+    // Get all Restaurants
+    router.get('/', restaurants.findAll);
+
+    // Get a single Restaurant by id
+    router.get('/:id', restaurants.findOne);
+
     app.use('/api/restaurants', router);
 }

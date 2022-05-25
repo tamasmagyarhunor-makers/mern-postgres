@@ -22,6 +22,7 @@ exports.create = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
+                success: false,
                 message: err.message || "Some error occured while creating the Restaurant."
             });
         });
@@ -33,12 +34,43 @@ exports.create = (req, res) => {
 
 // Retrieve all Restaurants from the database.
 exports.findAll = (req, res) => {
-
+    Restaurant.findAll()
+    .then(restaurants => {
+        res.send({
+            success: true,
+            restaurants: restaurants
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            success: false,
+            message: err.message || "Some error occured while retrieving Restaurants."
+        })
+    });
 };
 
 // Find a single Restaurant with an id
 exports.findOne = (req, res) => {
-
+    Restaurant.findByPk(req.params.id)
+        .then(restaurant => {
+            if (restaurant) {
+                res.send({
+                    success: true,
+                    restaurant: restaurant
+                });
+            } else {
+                res.status(404).send({
+                    success: false,
+                    message: `Cannot find Restaurant with id=${id}.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                success: false,
+                message: "Error retrieving Restaurant with id=" + req.params.id
+            });
+        });
 };
 
 // Update a Restaurant by the id in the request
