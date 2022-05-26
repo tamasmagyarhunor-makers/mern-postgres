@@ -8,6 +8,12 @@ module.exports = app => {
     // Get all Restaurants
     router.get('/', restaurants.findAll);
 
+    // Find all Restaurants that are open
+    // a very silly bug here, if we put the /open after the
+    // '/:d' it will pass in open as an id and the request
+    // will fail
+    router.get('/open', restaurants.findAllOpen);
+
     // Get a single Restaurant by id
     router.get('/:id', restaurants.findOne);
 

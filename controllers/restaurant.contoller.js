@@ -62,7 +62,7 @@ exports.findOne = (req, res) => {
             } else {
                 res.status(404).send({
                     success: false,
-                    message: `Cannot find Restaurant with id=${id}.`
+                    message: `Cannot find Restaurant with id=${req.params.id}.`
                 });
             }
         })
@@ -123,5 +123,18 @@ exports.delete = (req, res) => {
 
 // Find all open Restaurants
 exports.findAllOpen = (req, res) => {
-
+    console.log(req);
+    Restaurant.findAll({ where: { open: true } })
+        .then(restaurants => {
+            res.send({
+                success: true,
+                restaurants: restaurants
+            })
+        })
+        .catch(err => {
+            res.status(500).send({
+                success: false,
+                message: err.message || "Some error occured retrieving Restaurants!"
+            });
+        });
 };
