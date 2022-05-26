@@ -14,5 +14,8 @@ module.exports = app => {
     // Update a single Restaurant by id
     router.put('/:id', restaurants.update);
 
+    // Delete a Restaurant by id
+    router.delete('/:id', restaurants.delete);
+
     app.use('/api/restaurants', router);
 }

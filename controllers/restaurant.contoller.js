@@ -97,7 +97,28 @@ exports.update = (req, res) => {
 
 // Delete a Restaurant with the specified id in the request
 exports.delete = (req, res) => {
-
+    Restaurant.destroy({
+        where: { id: req.params.id }
+        })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    success: true,
+                    message: `Restaurant with id=${req.params.id} has been deleted successfully!`
+                });
+            } else {
+                res.send({
+                    success: false,
+                    message: `Cannot delete Restaurant with id=${req.params.id}, maybe not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                success: false,
+                message: err.message || `Coult not delete Restaurant with id=${req.params.id}!`
+            });
+        });
 };
 
 // Find all open Restaurants
