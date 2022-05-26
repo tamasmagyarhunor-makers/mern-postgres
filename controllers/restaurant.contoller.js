@@ -69,14 +69,30 @@ exports.findOne = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 success: false,
-                message: "Error retrieving Restaurant with id=" + req.params.id
+                message: err.message || "Error retrieving Restaurant with id=" + req.params.id
             });
         });
 };
 
 // Update a Restaurant by the id in the request
 exports.update = (req, res) => {
-
+    Restaurant.update(req.body, {
+        where: { id: req.params.id }
+        })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    success: true,
+                    message: `Restaurant with ${req.params.id} has been updated successfully!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                success: false,
+                message: err.message || `Error updateing Restaurant with id=${req.params.id} !`
+            });
+        });
 };
 
 // Delete a Restaurant with the specified id in the request

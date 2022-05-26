@@ -11,5 +11,8 @@ module.exports = app => {
     // Get a single Restaurant by id
     router.get('/:id', restaurants.findOne);
 
+    // Update a single Restaurant by id
+    router.put('/:id', restaurants.update);
+
     app.use('/api/restaurants', router);
 }
