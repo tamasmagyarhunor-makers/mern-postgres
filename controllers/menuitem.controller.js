@@ -83,7 +83,7 @@ exports.update = (req, res) => {
             if (num == 1) {
                 res.send({
                     success: true,
-                    message: `MenuItem with ${req.params.id} has been updated successfully!`
+                    message: `MenuItem with id=${req.params.id} has been updated successfully!`
                 });
             }
         })
