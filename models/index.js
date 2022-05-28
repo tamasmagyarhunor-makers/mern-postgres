@@ -16,4 +16,16 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.restaurants = require('./restaurant.model.js')(sequelize, Sequelize);
+db.menus = require('./menu.model.js')(sequelize, Sequelize);
+
+db.restaurants.hasMany(db.menus, {
+    foreignKey: 'restaurant_id',
+    sourceKey: 'id'
+});
+
+db.menus.belongsTo(db.restaurants, {
+    foreignKey: 'restaurant_id',
+    sourceKey: 'id'
+});
+
 module.exports = db;
