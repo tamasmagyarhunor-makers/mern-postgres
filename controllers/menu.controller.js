@@ -137,3 +137,32 @@ exports.findAllActive = (req, res) => {
             });
         });
 };
+
+// Find one Menu by id with its Restaurant
+exports.findOneWithItsRestaurant = (req, res) => {
+    Menu.findByPk(req.params.id, {
+        include: [{
+            model: db.restaurants,
+            as: 'restaurant'
+        }]
+    })
+    .then(menu => {
+        if (menu) {
+            res.send({
+                success: true,
+                menu: menu
+            });
+        } else {
+            res.status(404).send({
+                success: false,
+                message: `Cannot find Menu with id=${req.params.id}.`
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            success: false,
+            message: err.message || "Error retrieving Menu with id=" + req.params.id
+        });
+    });
+}

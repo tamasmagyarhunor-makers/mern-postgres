@@ -17,6 +17,9 @@ module.exports = app => {
     // Update a single Menu by id
     router.put('/:id', menus.update);
 
+    // Get a single Menu by id with it's Restaurant
+    router.get('/:id/restaurant', menus.findOneWithItsRestaurant);
+
     // Delete a Menu by id
     router.delete('/:id', menus.delete);
 
