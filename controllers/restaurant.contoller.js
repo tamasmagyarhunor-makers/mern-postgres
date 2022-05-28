@@ -28,7 +28,7 @@ exports.create = (req, res) => {
             });
         });
 
-        // some people do a constant assigning the payload parameters to the 
+        // some developers do a constant assigning the payload parameters to the 
         // models different fields and then pass in that constant into the
         // create function, I feel for our purpose, it's a waste of space
 };
@@ -73,6 +73,34 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
+exports.findOneWithMenus = (req, res) => {
+    Restaurant.findByPk(req.params.id, {
+        include: [{
+            model: db.menus,
+            as: 'menus'
+        }],
+    })
+    .then(restaurant => {
+        if (restaurant) {
+            res.send({
+                success: true,
+                restaurant: restaurant
+            });
+        } else {
+            res.status(404).send({
+                success: false,
+                message: `Cannot find Restaurant with id=${req.params.id}.`
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            success: false,
+            message: err.message || "Error retrieving Restaurant with id=" + req.params.id
+        });
+    });
+}
 
 // Update a Restaurant by the id in the request
 exports.update = (req, res) => {
@@ -123,7 +151,6 @@ exports.delete = (req, res) => {
 
 // Find all open Restaurants
 exports.findAllOpen = (req, res) => {
-    console.log(req);
     Restaurant.findAll({ where: { open: true } })
         .then(restaurants => {
             res.send({

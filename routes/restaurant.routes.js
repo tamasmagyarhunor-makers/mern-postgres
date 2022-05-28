@@ -17,6 +17,9 @@ module.exports = app => {
     // Get a single Restaurant by id
     router.get('/:id', restaurants.findOne);
 
+    // Get a single Restaurant by id and all Menus related to it
+    router.get('/:id/menus', restaurants.findOneWithMenus);
+
     // Update a single Restaurant by id
     router.put('/:id', restaurants.update);
 
