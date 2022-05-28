@@ -12,7 +12,7 @@ module.exports = app => {
     router.get('/active', menuItems.findAllActive);
 
     // Get a single MenuItem by id
-    router.get('/', menuItems.findOne);
+    router.get('/:id', menuItems.findOne);
 
     // Update a single MenuItem by id
     router.put('/:id', menuItems.update);
