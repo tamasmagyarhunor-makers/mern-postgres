@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
     res.json({ message: "Welcome to our amazing application. " });
 });
 
-
 require('./routes/restaurant.routes')(app);
+require('./routes/menu.routes')(app);
 // set port, listen for requests
 
 const PORT = process.env.PORT || 8080;
