@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const { sequelize } = require(".");
 
 module.exports = (sequelize, Sequelize) => {
-    const MenuItems = sequelize.define('menuItems', {
+    const MenuItem = sequelize.define('menuItems', {
         name: {
             type: Sequelize.STRING
         },
@@ -14,14 +14,15 @@ module.exports = (sequelize, Sequelize) => {
             references: {
                 model: 'menus',
                 key: 'id',
-                deferrable: Sequelize.Defferable.INITIALLY_IMMEDIATE
+                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
             }
         },
         active: {
-            type: Sequelize.BOOELAN
+            type: Sequelize.BOOLEAN
         }
     },
     {
         timestamps: true
     });
+    return MenuItem;
 };
