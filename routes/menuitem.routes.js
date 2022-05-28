@@ -23,5 +23,5 @@ module.exports = app => {
     // Delete a MenuItem by id
     router.delete('/:id', menuItems.delete);
 
-    app.use('/api/menus', router);
+    app.use('/api/menuItems', router);
 }
